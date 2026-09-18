@@ -31,8 +31,8 @@ const services = [
 ];
 
 const videos = [
-  ["TdjIs0jwcFg", "Finished project of Nales Global"], ["OHaGZ2MCQ2I", "Nales Global project"], ["T-wDuEzneBQ", "Finished project showcase"],
-  ["DPHNRIWdyII", "Men at work"], ["MhCY10qlwM", "On-site execution"], ["PmW56Obgi4M", "Project delivery"], ["FrzARaXDpCg", "Project 06"]
+  ["chkZ31eEIFQ", "Finished project of Nales Global"], ["skzWDJcuw1w", "Nales Global project"], ["j9ofZ97E2hA", "Finished project showcase"],
+  ["n8l8W51CfXw", "Men at work"], ["PkTc6Q0XyCM", "On-site execution"], ["24PBmfIJbqs", "Project delivery"], ["_M1INuL7aRs", "Project 06"]
 ];
 
 function Header() {
