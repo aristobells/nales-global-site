@@ -78,12 +78,12 @@ a {
 }
 .brand b {
   font-family: "Space Grotesk";
-  font-size: 14px;
+  font-size: 20px;
   letter-spacing: 0.11em;
   color: var(--ink);
 }
 .brand small {
-  font-size: 10px;
+  font-size: 14px;
   color: var(--bronze);
   letter-spacing: 0.11em;
   margin-top: 5px;
