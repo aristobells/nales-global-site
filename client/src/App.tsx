@@ -124,6 +124,7 @@ function CTA() { return <section className="cta-band"><div className="container 
 
 function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [playingProofVideo, setPlayingProofVideo] = useState<string | null>(null);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -134,6 +135,7 @@ function Home() {
   }, []);
 
   const activeHero = heroSlides[activeSlide];
+  const proofVideos = videos.slice(0, 5);
 
   return <><main>
   <section className="hero hero-carousel">
@@ -187,7 +189,7 @@ function Home() {
   <section className="trust-strip"><div className="container trust-items"><span><ShieldCheck size={19} /> HSE compliant</span><span><Award size={19} /> Quality focused</span><span><Building2 size={19} /> Multi-sector expertise</span><span><Sparkles size={19} /> Client-first delivery</span></div></section>
   <section className="section about-preview"><div className="container split-grid"><div className="image-stack"><div className="about-collage">{aboutCollage.map((image) => <img key={image.src} className={`collage-card ${image.className}`} src={image.src} alt={image.alt} />)}</div><div className="image-tag"><b>20+</b><span>years of<br />combined expertise</span></div></div><div><SectionIntro eyebrow="Who we are" title="Built for the work that matters." text="Nales Global Services Limited is an indigenous EPC company delivering civil, electrical, mechanical, procurement and contracting solutions across Nigeria’s public and private sectors." /><p className="body-copy">We combine practical engineering know-how with modern project management to keep work moving and outcomes dependable. From first scope to final handover, our focus is simple: do the work properly.</p><Link href="/about" className="text-link strong">More about Nales Global <ArrowRight size={16} /></Link></div></div></section>
   <section className="section soft-bg"><div className="container"><SectionIntro eyebrow="What we do" title="Capability across the project lifecycle." text="One experienced partner for the disciplines, materials and delivery support your project demands."/><div className="service-grid preview-grid">{services.map(s => <ServiceCard item={s} key={s.name} />)}</div><Link href="/services" className="button button-dark centered-button">See all services <ArrowRight size={16} /></Link></div></section>
-  <section className="section gallery-preview"><div className="container"><div className="row-heading"><SectionIntro eyebrow="Selected work" title="Proof in the project." text="Real people. Real sites. Real delivery."/><Link href="/gallery" className="text-link">Open project gallery <ArrowRight size={16} /></Link></div><div className="gallery-mosaic"><Link href="/gallery" className="mosaic-large"><img src={images[1].src} alt={images[1].label}/><span>{images[1].label}<ArrowRight size={16}/></span></Link><Link href="/gallery"><img src={images[4].src} alt={images[4].label}/></Link><Link href="/gallery"><img src={images[7].src} alt={images[7].label}/></Link></div></div></section>
+  <section className="section gallery-preview"><div className="container"><div className="row-heading"><SectionIntro eyebrow="Selected work" title="Proof in the project." text="Real people. Real sites. Real delivery."/><Link href="/gallery" className="text-link">Open project gallery <ArrowRight size={16} /></Link></div><div className="proof-slider" aria-label="Project videos"><div className="proof-track">{[0, 1].map((copy) => proofVideos.map(([id, title]) => { const cardKey = `${copy}-${id}`; return <div className="proof-video video-card" key={cardKey}>{playingProofVideo === cardKey ? <iframe src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1`} title={title} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen/> : <button onClick={() => setPlayingProofVideo(cardKey)}><img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt={title}/><span className="play"><Play size={20} fill="currentColor"/></span><b>{title}</b></button>}</div>; }))}</div></div></div></section>
   <CTA />
 </main></> }
 

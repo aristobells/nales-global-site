@@ -556,6 +556,31 @@ h2 em {
   align-items: center;
   gap: 9px;
 }
+.proof-slider {
+  width: 100%;
+  overflow: hidden;
+}
+.proof-track {
+  display: flex;
+  width: max-content;
+  gap: 18px;
+  animation: proof-marquee 32s linear infinite;
+}
+.proof-video {
+  flex: 0 0 clamp(280px, 34vw, 430px);
+  aspect-ratio: 16 / 10;
+}
+@keyframes proof-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - 9px));
+  }
+}
+.proof-track:hover {
+  animation-play-state: paused;
+}
 .mosaic-large {
   grid-row: span 2;
 }
