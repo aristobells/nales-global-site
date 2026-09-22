@@ -1271,8 +1271,11 @@ footer {
     grid-template-columns: 1fr;
     gap: 45px;
   }
-  .image-stack img {
+  .image-stack > img {
     height: 330px;
+  }
+  .about-collage {
+    grid-template-rows: 100px 90px 165px;
   }
   .section-intro {
     margin-bottom: 30px;
