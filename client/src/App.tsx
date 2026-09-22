@@ -1,10 +1,58 @@
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { Link, Route, Switch, useLocation } from "wouter";
 import {
-  ArrowRight, Award, Building2, Check, ChevronDown, ChevronRight, Cog, Facebook, Globe2,
+  ArrowRight, Award, Building2, Check, ChevronDown, ChevronLeft, ChevronRight, Cog, Facebook, Globe2,
   HardHat, Instagram, Linkedin, Mail, MapPin, Menu, Music2, Phone, Play, Send, ShoppingCart,
   ShieldCheck, Sparkles, X, Zap, BriefcaseBusiness, Wrench
 } from "lucide-react";
+
+const heroSlides = [
+  {
+    src: "/assets/images/hero1.png",
+    eyebrow: "Nigerian EPC company · RC 923859",
+    title: <><span>Infrastructure</span><br /><em>that moves</em> Nigeria forward.</>,
+    text: "Engineering, procurement and construction expertise for ambitious projects across Nigeria.",
+    note: "01",
+    noteText: "Delivering value",
+    noteCaption: "Built on capability, safety and trust."
+  },
+  {
+    src: "/assets/images/hero2.jpg",
+    eyebrow: "Project delivery",
+    title: <><span>Execution</span><br /><em>with precision</em> on every site.</>,
+    text: "From civil works to electrical and mechanical installation, we keep project momentum high without compromising quality.",
+    note: "02",
+    noteText: "Site discipline",
+    noteCaption: "Progress driven by planning and accountability."
+  },
+  {
+    src: "/assets/images/hero3.jpg",
+    eyebrow: "Quality & safety",
+    title: <><span>Built to last</span><br /><em>and built</em> to perform.</>,
+    text: "Safe systems, dependable workmanship and disciplined supervision help us deliver infrastructure that stands up to real-world use.",
+    note: "03",
+    noteText: "Measured results",
+    noteCaption: "Safety, quality and lasting value at every stage."
+  },
+  {
+    src: "/assets/images/hero4.jpg",
+    eyebrow: "Multi-sector capability",
+    title: <><span>Solutions</span><br /><em>for complex</em> environments.</>,
+    text: "We support public and private clients with engineering, procurement and contracting support across demanding sectors.",
+    note: "04",
+    noteText: "Trusted partner",
+    noteCaption: "From concept to handover, we stay accountable."
+  },
+  {
+    src: "/assets/images/hero5.jpg",
+    eyebrow: "Client-first delivery",
+    title: <><span>Reliable progress</span><br /><em>for every</em> milestone.</>,
+    text: "Clear communication, practical problem-solving and execution discipline help clients stay confident from day one to final handover.",
+    note: "05",
+    noteText: "Progress with purpose",
+    noteCaption: "Grounded in service, speed and standards."
+  }
+];
 
 const images = [
   { src: "/assets/images/Hero.jpg", label: "Building a stronger tomorrow" },
@@ -19,6 +67,15 @@ const images = [
   { src: "/assets/images/project9.jpeg", label: "Finished project" },
   { src: "/assets/images/project10.jpeg", label: "Commercial delivery" },
   { src: "/assets/images/project11.jpeg", label: "Technical capability" },
+  { src: "/assets/images/project12.jpeg", label: "Project delivery" },
+];
+
+const aboutCollage = [
+  { src: "/assets/images/project1.jpeg", alt: "Infrastructure and civil works", className: "main" },
+  { src: "/assets/images/project2.jpeg", alt: "Construction site execution", className: "small" },
+  { src: "/assets/images/project5.jpeg", alt: "Engineering solutions on site", className: "tall" },
+  { src: "/assets/images/project12.jpeg", alt: "Progress on a live project", className: "small" },
+  { src: "/assets/images/site%20_1_in_in_progress.jpeg", alt: "Site in progress", className: "wide" },
 ];
 
 const services = [
@@ -65,10 +122,70 @@ function SectionIntro({ eyebrow, title, text, align = "left" }: { eyebrow: strin
 function ServiceCard({ item, detailed = false }: { item: typeof services[number]; detailed?: boolean }) { const Icon = item.icon; return <article className="service-card"><div className="icon-box"><Icon size={25} strokeWidth={1.7} /></div><h3>{item.name}</h3><p>{item.short}</p>{detailed && <ul>{item.bullets.map(b => <li key={b}><Check size={15} />{b}</li>)}</ul>} {!detailed && <Link href="/services" className="text-link">Explore service <ArrowRight size={15} /></Link>}</article> }
 function CTA() { return <section className="cta-band"><div className="container cta-inner"><div><span className="eyebrow light">Start a conversation</span><h2>Have a project in mind?</h2><p>Tell us what you’re building. Our team is ready to bring the right expertise to the table.</p></div><div className="cta-actions"><Link className="button button-white" href="/contact">Contact our team <ArrowRight size={16} /></Link></div></div></section> }
 
-function Home() { return <><main>
-  <section className="hero"><img className="hero-image" src={images[0].src} alt="Nales Global construction project" /><div className="hero-overlay" /><div className="container hero-content"><div className="hero-copy"><span className="eyebrow light">Nigerian EPC company · RC 923859</span><h1>Infrastructure<br /><em>that moves</em> Nigeria forward.</h1><p>Engineering, procurement and construction expertise for ambitious projects across Nigeria.</p><div className="hero-actions"><Link href="/contact" className="button button-white">Discuss your project <ArrowRight size={17} /></Link><Link href="/gallery" className="button button-ghost">View our work <ChevronRight size={17} /></Link></div></div><div className="hero-note"><span>01</span><div><b>Delivering value</b><small>Built on capability, safety and trust.</small></div></div></div></section>
+function Home() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length);
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const activeHero = heroSlides[activeSlide];
+
+  return <><main>
+  <section className="hero hero-carousel">
+    <div className="hero-slides" aria-live="polite" aria-atomic="true">
+      {heroSlides.map((slide, index) => (
+        <div key={slide.src} className={index === activeSlide ? "hero-slide active" : "hero-slide"}>
+          <img className="hero-image" src={slide.src} alt={slide.eyebrow} />
+        </div>
+      ))}
+    </div>
+    <div className="hero-overlay" />
+    <div className="container hero-content">
+      <div className="hero-copy">
+        <span className="eyebrow light">{activeHero.eyebrow}</span>
+        <h1>{activeHero.title}</h1>
+        <p>{activeHero.text}</p>
+        <div className="hero-actions">
+          <Link href="/contact" className="button button-white">Discuss your project <ArrowRight size={17} /></Link>
+          <Link href="/gallery" className="button button-ghost">View our work <ChevronRight size={17} /></Link>
+        </div>
+      </div>
+      <div className="hero-note">
+        <span>{activeHero.note}</span>
+        <div>
+          <b>{activeHero.noteText}</b>
+          <small>{activeHero.noteCaption}</small>
+        </div>
+      </div>
+      <div className="hero-controls" aria-label="Hero slide controls">
+        <button type="button" className="hero-arrow" aria-label="Previous slide" onClick={() => setActiveSlide((current) => (current - 1 + heroSlides.length) % heroSlides.length)}>
+          <ChevronLeft size={18} />
+        </button>
+        <div className="hero-dots" role="tablist" aria-label="Choose a hero slide">
+          {heroSlides.map((slide, index) => (
+            <button
+              key={slide.src}
+              type="button"
+              className={index === activeSlide ? "dot active" : "dot"}
+              aria-label={`Show slide ${index + 1}`}
+              aria-selected={index === activeSlide}
+              onClick={() => setActiveSlide(index)}
+            />
+          ))}
+        </div>
+        <button type="button" className="hero-arrow" aria-label="Next slide" onClick={() => setActiveSlide((current) => (current + 1) % heroSlides.length)}>
+          <ChevronRight size={18} />
+        </button>
+      </div>
+    </div>
+  </section>
   <section className="trust-strip"><div className="container trust-items"><span><ShieldCheck size={19} /> HSE compliant</span><span><Award size={19} /> Quality focused</span><span><Building2 size={19} /> Multi-sector expertise</span><span><Sparkles size={19} /> Client-first delivery</span></div></section>
-  <section className="section about-preview"><div className="container split-grid"><div className="image-stack"><img src={images[3].src} alt="Nales Global team at work" /><div className="image-tag"><b>20+</b><span>years of<br />combined expertise</span></div></div><div><SectionIntro eyebrow="Who we are" title="Built for the work that matters." text="Nales Global Services Limited is an indigenous EPC company delivering civil, electrical, mechanical, procurement and contracting solutions across Nigeria’s public and private sectors." /><p className="body-copy">We combine practical engineering know-how with modern project management to keep work moving and outcomes dependable. From first scope to final handover, our focus is simple: do the work properly.</p><Link href="/about" className="text-link strong">More about Nales Global <ArrowRight size={16} /></Link></div></div></section>
+  <section className="section about-preview"><div className="container split-grid"><div className="image-stack"><div className="about-collage">{aboutCollage.map((image) => <img key={image.src} className={`collage-card ${image.className}`} src={image.src} alt={image.alt} />)}</div><div className="image-tag"><b>20+</b><span>years of<br />combined expertise</span></div></div><div><SectionIntro eyebrow="Who we are" title="Built for the work that matters." text="Nales Global Services Limited is an indigenous EPC company delivering civil, electrical, mechanical, procurement and contracting solutions across Nigeria’s public and private sectors." /><p className="body-copy">We combine practical engineering know-how with modern project management to keep work moving and outcomes dependable. From first scope to final handover, our focus is simple: do the work properly.</p><Link href="/about" className="text-link strong">More about Nales Global <ArrowRight size={16} /></Link></div></div></section>
   <section className="section soft-bg"><div className="container"><SectionIntro eyebrow="What we do" title="Capability across the project lifecycle." text="One experienced partner for the disciplines, materials and delivery support your project demands."/><div className="service-grid preview-grid">{services.map(s => <ServiceCard item={s} key={s.name} />)}</div><Link href="/services" className="button button-dark centered-button">See all services <ArrowRight size={16} /></Link></div></section>
   <section className="section gallery-preview"><div className="container"><div className="row-heading"><SectionIntro eyebrow="Selected work" title="Proof in the project." text="Real people. Real sites. Real delivery."/><Link href="/gallery" className="text-link">Open project gallery <ArrowRight size={16} /></Link></div><div className="gallery-mosaic"><Link href="/gallery" className="mosaic-large"><img src={images[1].src} alt={images[1].label}/><span>{images[1].label}<ArrowRight size={16}/></span></Link><Link href="/gallery"><img src={images[4].src} alt={images[4].label}/></Link><Link href="/gallery"><img src={images[7].src} alt={images[7].label}/></Link></div></div></section>
   <CTA />
