@@ -55,6 +55,9 @@ a {
   top: 0;
   z-index: 20;
 }
+.site-header .container {
+  width: min(1240px, calc(100% - 32px));
+}
 .nav-inner {
   height: 100%;
   display: flex;
@@ -91,8 +94,8 @@ a {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 25px;
-  font-size: 13px;
+  gap: 24px;
+  font-size: 14px;
   font-weight: 600;
   color: #52606c;
 }
@@ -109,6 +112,20 @@ a {
   gap: 6px;
   color: var(--ink) !important;
   margin-left: 10px;
+}
+.nav-social .social-links {
+  margin: 0;
+  gap: 6px;
+  margin-left: 2px;
+}
+.nav-social .social-links a {
+  width: 28px;
+  height: 28px;
+  color: var(--blue) !important;
+  border-color: #cfe2eb;
+}
+.nav-social .social-links a:hover {
+  color: #fff !important;
 }
 .button {
   display: inline-flex;
@@ -1167,6 +1184,9 @@ footer {
   .site-header {
     height: 68px;
   }
+  .site-header .container {
+    width: min(100% - 34px, 1180px);
+  }
   .brand img {
     width: 37px;
     height: 37px;
@@ -1202,6 +1222,17 @@ footer {
   }
   .nav-links .nav-phone {
     margin-left: 0;
+  }
+  .nav-links .nav-social {
+    padding: 11px 0;
+    border-bottom: 1px solid #edf1f3;
+  }
+  .nav-links .nav-social .social-links {
+    margin: 0;
+  }
+  .nav-links .nav-social .social-links a {
+    padding: 0;
+    border-bottom: 0;
   }
   .nav-links .button {
     margin-top: 10px;

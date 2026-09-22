@@ -100,7 +100,7 @@ function Header() {
     <header className="site-header">
       <div className="container nav-inner">
         <Link href="/" className="brand" onClick={() => setOpen(false)}><img src="/assets/images/logo.png" alt="Nales Global Services Limited" /><span><b>NALES GLOBAL</b><small>Services Limited</small></span></Link>
-        <nav className={open ? "nav-links open" : "nav-links"}>{nav.map(([href, label]) => <Link key={href} href={href} className={location === href ? "active" : ""} onClick={() => setOpen(false)}>{label}</Link>)}<a className="nav-phone" href="tel:+2348030615862"><Phone size={15} /> <span>+234 803 061 5862</span></a><Link href="/contact" className="button button-small" onClick={() => setOpen(false)}>Get a quote <ArrowRight size={15} /></Link></nav>
+        <nav className={open ? "nav-links open" : "nav-links"}>{nav.map(([href, label]) => <Link key={href} href={href} className={location === href ? "active" : ""} onClick={() => setOpen(false)}>{label}</Link>)}<a className="nav-phone" href="tel:+2348030615862"><Phone size={15} /> <span>+234 803 061 5862</span></a><Link href="/contact" className="button button-small" onClick={() => setOpen(false)}>Get a quote <ArrowRight size={15} /></Link><div className="nav-social"><SocialLinks compact /></div></nav>
         <button className="menu-button" aria-label="Toggle menu" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
       </div>
     </header>
