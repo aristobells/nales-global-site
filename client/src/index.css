@@ -662,6 +662,12 @@ h2 em {
   color: var(--muted);
   margin: 0;
 }
+.service-row-main > p.service-lead {
+  color: var(--ink);
+  font-family: "Space Grotesk";
+  font-weight: 600;
+  margin-bottom: 7px;
+}
 .expand-button {
   border: 1px solid var(--line);
   width: 36px;
