@@ -5,6 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { defineConfig, type Plugin, type ViteDevServer } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
+import sitemap from "vite-plugin-sitemap";
 
 // =============================================================================
 // Manus Debug Collector - Vite Plugin
@@ -203,7 +204,20 @@ function vitePluginStorageProxy(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
+const plugins = [
+  react(),
+  tailwindcss(),
+  jsxLocPlugin(),
+  vitePluginManusRuntime(),
+  vitePluginManusDebugCollector(),
+  vitePluginStorageProxy(),
+  sitemap({
+    hostname: "https://www.nalesglobal.world",
+    dynamicRoutes: ["/about", "/services", "/gallery", "/contact"],
+    outDir: path.resolve(import.meta.dirname, "dist", "public"),
+    generateRobotsTxt: true,
+  }),
+];
 
 export default defineConfig({
   plugins,
